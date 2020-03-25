@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +26,6 @@ public class OneDimensionalMaze : MonoBehaviour {
     int Submit = 0;
 
     void Awake () {
-
         GetComponent<KMBombModule>().OnActivate += Activate;
         moduleId = moduleIdCounter++;
         foreach (KMSelectable Button in Buttons) {
@@ -34,6 +33,7 @@ public class OneDimensionalMaze : MonoBehaviour {
                 }
                 Ball.OnInteract += delegate () { PressBall(); return false; };
     }
+    
     // Use this for initialization
     void Start () {
       SN = Bomb.GetSerialNumber();
@@ -44,6 +44,7 @@ public class OneDimensionalMaze : MonoBehaviour {
       Ball.GetComponent<MeshRenderer>().material = color[Fuck];
       Debug.LogFormat("[1D Maze #{0}] You started at cell {1}.",moduleId,(You));
 	}
+    
   void ButtonPress(KMSelectable Button){
     if (moduleSolved) {
       return;
@@ -75,160 +76,32 @@ public class OneDimensionalMaze : MonoBehaviour {
       Debug.Log(You);
     }
   }
+  
   void PressBall(){
-    Ball.AddInteractionPunch();
-    GetComponent<KMAudio>().PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
-    if (moduleSolved) {
-      return;
+        Ball.AddInteractionPunch();
+        GetComponent<KMAudio>().PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
+        if (moduleSolved) {
+          return;
+        }
+        for (int i = 0; i < 10; i++) {
+        	if (Callitsomethingyoucanremember == i) {
+        		if (You % 10 == i) {
+        			  GetComponent<KMBombModule>().HandlePass();
+        			  Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Module disarmed.",moduleId,(You));
+        			  Audio.PlaySoundAtTransform("Farfare", transform);
+        			  moduleSolved = true;
+        			  Ball.GetComponent<MeshRenderer>().material = color[2];
+        			}
+        			else {
+        			  GetComponent<KMBombModule>().HandleStrike();
+        			  Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Strike, poopyhead.",moduleId,(You));
+        			  Ball.GetComponent<MeshRenderer>().material = color[3];
+        		}
+        	}
+        }
     }
-    switch (Callitsomethingyoucanremember) {
-    case 0:
-    if (You % 10 == 0) {
-      GetComponent<KMBombModule>().HandlePass();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Module disarmed.",moduleId,(You));
-      Audio.PlaySoundAtTransform("Farfare", transform);
-      moduleSolved = true;
-      Ball.GetComponent<MeshRenderer>().material = color[2];
-    }
-    else {
-      GetComponent<KMBombModule>().HandleStrike();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Strike, poopyhead.",moduleId,(You));
-      Ball.GetComponent<MeshRenderer>().material = color[3];
-    }
-    break;
-    case 1:
-    if (You % 10 == 1) {
-      GetComponent<KMBombModule>().HandlePass();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Module disarmed.",moduleId,(You));
-      Audio.PlaySoundAtTransform("Farfare", transform);
-      moduleSolved = true;
-      Ball.GetComponent<MeshRenderer>().material = color[2];
-    }
-    else {
-      GetComponent<KMBombModule>().HandleStrike();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Strike, poopyhead.",moduleId,(You));
-      Ball.GetComponent<MeshRenderer>().material = color[3];
-    }
-    break;
-    case 2:
-    if (You % 10 == 2) {
-      GetComponent<KMBombModule>().HandlePass();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Module disarmed.",moduleId,(You));
-      Audio.PlaySoundAtTransform("Farfare", transform);
-      moduleSolved = true;
-      Ball.GetComponent<MeshRenderer>().material = color[2];
-    }
-    else {
-      GetComponent<KMBombModule>().HandleStrike();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Strike, poopyhead.",moduleId,(You));
-      Ball.GetComponent<MeshRenderer>().material = color[3];
-    }
-    break;
-    case 3:
-    if (You % 10 == 3) {
-      GetComponent<KMBombModule>().HandlePass();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Module disarmed.",moduleId,(You));
-      Audio.PlaySoundAtTransform("Farfare", transform);
-      moduleSolved = true;
-      Ball.GetComponent<MeshRenderer>().material = color[2];
-    }
-    else {
-      GetComponent<KMBombModule>().HandleStrike();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Strike, poopyhead.",moduleId,(You));
-      Ball.GetComponent<MeshRenderer>().material = color[3];
-    }
-    break;
-    case 4:
-    if (You % 10 == 4) {
-      GetComponent<KMBombModule>().HandlePass();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Module disarmed.",moduleId,(You));
-      Audio.PlaySoundAtTransform("Farfare", transform);
-      moduleSolved = true;
-      Ball.GetComponent<MeshRenderer>().material = color[2];
-    }
-    else {
-      GetComponent<KMBombModule>().HandleStrike();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Strike, poopyhead.",moduleId,(You));
-      Ball.GetComponent<MeshRenderer>().material = color[3];
-    }
-    break;
-    case 5:
-    if (You % 10 == 5) {
-      GetComponent<KMBombModule>().HandlePass();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Module disarmed.",moduleId,(You));
-      Audio.PlaySoundAtTransform("Farfare", transform);
-      moduleSolved = true;
-      Ball.GetComponent<MeshRenderer>().material = color[2];
-    }
-    else {
-      GetComponent<KMBombModule>().HandleStrike();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Strike, poopyhead.",moduleId,(You));
-      Ball.GetComponent<MeshRenderer>().material = color[3];
-    }
-    break;
-    case 6:
-    if (You % 10 == 6) {
-      GetComponent<KMBombModule>().HandlePass();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Module disarmed.",moduleId,(You));
-      Audio.PlaySoundAtTransform("Farfare", transform);
-      moduleSolved = true;
-      Ball.GetComponent<MeshRenderer>().material = color[2];
-    }
-    else {
-      GetComponent<KMBombModule>().HandleStrike();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Strike, poopyhead.",moduleId,(You));
-      Ball.GetComponent<MeshRenderer>().material = color[3];
-    }
-    break;
-    case 7:
-    if (You % 10 == 7) {
-      GetComponent<KMBombModule>().HandlePass();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Module disarmed.",moduleId,(You));
-      Audio.PlaySoundAtTransform("Farfare", transform);
-      moduleSolved = true;
-      Ball.GetComponent<MeshRenderer>().material = color[2];
-    }
-    else {
-      GetComponent<KMBombModule>().HandleStrike();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Strike, poopyhead.",moduleId,(You));
-      Ball.GetComponent<MeshRenderer>().material = color[3];
-    }
-    break;
-    case 8:
-    if (You % 10 == 8) {
-      GetComponent<KMBombModule>().HandlePass();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Module disarmed.",moduleId,(You));
-      Audio.PlaySoundAtTransform("Farfare", transform);
-      moduleSolved = true;
-      Ball.GetComponent<MeshRenderer>().material = color[2];
-    }
-    else {
-      GetComponent<KMBombModule>().HandleStrike();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Strike, poopyhead.",moduleId,(You));
-      Ball.GetComponent<MeshRenderer>().material = color[3];
-    }
-    break;
-    case 9:
-    if (You % 10 == 9) {
-      GetComponent<KMBombModule>().HandlePass();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Module disarmed.",moduleId,(You));
-      Audio.PlaySoundAtTransform("Farfare", transform);
-      moduleSolved = true;
-      Ball.GetComponent<MeshRenderer>().material = color[2];
-    }
-    else {
-      GetComponent<KMBombModule>().HandleStrike();
-      Debug.LogFormat("[1D Maze #{0}] You submitted at {1}. Strike, poopyhead.",moduleId,(You));
-      Ball.GetComponent<MeshRenderer>().material = color[3];
-    }
-    break;
 
-    default:
-      Debug.LogFormat("You fucked up.");
-      break;
-    }
-    }
     void Activate(){
       Audio.PlaySoundAtTransform("Activate", transform);
     }
-  }
+}
